@@ -1,8 +1,9 @@
-import 'package:incidents/routes/route.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:incidents/routes/route.dart';
 import 'package:incidents/service/shared_pref.dart';
-
+ // Assuming you have route definitions
 
 class SanctumAuthMiddleware extends GetMiddleware {
   final _storage = Get.find<StorageService>();
