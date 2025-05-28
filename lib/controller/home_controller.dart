@@ -9,11 +9,12 @@ class HomeController extends GetxController {
   var selectedImagePath = ''.obs;
   var selectedImageSize = ''.obs;
 
-  PermissionsService permissionsService = Get.put(PermissionsService());
+late final  PermissionsService permissionsService ;
 
   @override
   void onInit() {
     super.onInit();
+    permissionsService = PermissionsService();
   }
 
   Future<void> getImage(ImageSource source) async {

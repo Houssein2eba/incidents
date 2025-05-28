@@ -12,12 +12,12 @@ import 'package:incidents/view/auth/login_form.dart';
 class RouteClass{
   static const String home = '/';
   static const String login = '/login';
-  static const String reguster='/reguster';
+  static const String register='/register';
 
 
   static String getHomeRoute() => home;
   static String getLoginRoute() => login; 
-  static String getRegusterRoute() => reguster;
+  static String getRegisterRoute() => register;
 
 
   static List<GetPage> getPages() {
@@ -25,7 +25,7 @@ class RouteClass{
       GetPage(name: home, page: () => HomePage(), binding:AppBindings(),middlewares: [
         SanctumAuthMiddleware()
       ]),
-      GetPage(name: reguster, page: () => RegisterForm()),
+      GetPage(name: register, page: () => RegisterForm()),
       GetPage(name: login, page: () => LoginForm(),binding: AppBindings()),
 
     ];

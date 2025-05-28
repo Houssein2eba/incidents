@@ -14,7 +14,7 @@ class LoginController extends GetxController {
   final RxBool isLoading = false.obs;
 
   final StorageService storageService = Get.find();
-  final String baseUrl = 'http://192.168.100.13:8000/api';
+  
 
   @override
   void onInit() {
@@ -24,41 +24,39 @@ class LoginController extends GetxController {
     super.onInit();
   }
 
-  @override
-  void onClose() {
-    identifier.dispose();
-    password.dispose();
-    super.onClose();
-  }
-
   void togglePasswordVisibility() {
     isPasswordHidden.value = !isPasswordHidden.value;
   }
 
   Future<void> login() async {
+    debugPrint('Login identifier===============: ${identifier.text.trim()}');
     try {
       isLoading.value = true;
 
-      final response = await http
-          .post(
-            Uri.parse('$baseUrl/login'),
-            headers: <String, String>{
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: jsonEncode(<String, String>{
-        'login': identifier.text.trim(),
-        'password': password.text.trim(),
-      }),
-          )
-          ;
-      debugPrint('Login response===============: ${response.body}'); 
+      final response = await http.post(
+        Uri.parse('http://192.168.100.13:8000/api/auth/login/'),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: jsonEncode(<String, String>{
+          'username': identifier.text.trim(),
+          'password': password.text.trim(),
+        }),
+      );
+      debugPrint('Login status code===============: ${response.statusCode}');
+      debugPrint('Login response===============: ${response.body}');
+
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
+        debugPrint(
+          'Login user email===============: ${data['user'].runtimeType}',
+        );
         await storageService.saveToken(data['token']);
-        final User user = User.fromJson(data['user']);
+        User user = User.fromJson(data['user']);
+        debugPrint("====user ${user}");
         await storageService.saveUser(user);
-        Get.offAllNamed(RouteClass.getHomeRoute());
+        Get.offNamed(RouteClass.getHomeRoute());
       } else {
         final errorData = json.decode(response.body);
         debugPrint('Login error: ${errorData['message']}');
@@ -86,9 +84,9 @@ class LoginController extends GetxController {
     try {
       isLoading.value = true;
       await storageService.clearToken();
-       await http
+      await http
           .post(
-            Uri.parse('$baseUrl/logout'),
+            Uri.parse('http://192.168.100.13:8000/api/auth/logout'),
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json',
