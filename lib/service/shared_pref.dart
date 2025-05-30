@@ -36,4 +36,14 @@ User? getUser() {
   return null;
 }
 
+Future<void> setBoolean(String key, bool value) async {
+    await _prefs.setBool(key, value);
+  }
+  bool getBoolean(String key) {
+    return _prefs.getBool(key) ?? false; 
+  }
+  Future<void> clearAll() async {
+    await _prefs.clear();
+  }
+
 }

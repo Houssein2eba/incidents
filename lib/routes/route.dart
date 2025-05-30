@@ -22,9 +22,7 @@ class RouteClass{
 
   static List<GetPage> getPages() {
     return [
-      GetPage(name: home, page: () => HomePage(), binding:AppBindings(),middlewares: [
-        SanctumAuthMiddleware()
-      ]),
+      GetPage(name: home, page: () => HomePage(), binding:AppBindings()),
       GetPage(name: register, page: () => RegisterForm()),
       GetPage(name: login, page: () => LoginForm(),binding: AppBindings()),
 

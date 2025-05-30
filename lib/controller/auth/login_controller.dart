@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:incidents/model/user_model.dart';
 import 'package:incidents/routes/route.dart';
+import 'package:incidents/service/biometric_auth.dart';
 import 'package:incidents/service/shared_pref.dart';
 
 class LoginController extends GetxController {
@@ -14,13 +16,12 @@ class LoginController extends GetxController {
   final RxBool isLoading = false.obs;
 
   final StorageService storageService = Get.find();
-  
 
   @override
   void onInit() {
     identifier = TextEditingController();
     password = TextEditingController();
-
+    _tryAutoBiometricAuth();
     super.onInit();
   }
 
@@ -29,7 +30,6 @@ class LoginController extends GetxController {
   }
 
   Future<void> login() async {
-    debugPrint('Login identifier===============: ${identifier.text.trim()}');
     try {
       isLoading.value = true;
 
@@ -44,17 +44,13 @@ class LoginController extends GetxController {
           'password': password.text.trim(),
         }),
       );
-      debugPrint('Login status code===============: ${response.statusCode}');
-      debugPrint('Login response===============: ${response.body}');
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
-        debugPrint(
-          'Login user email===============: ${data['user'].runtimeType}',
-        );
+
         await storageService.saveToken(data['token']);
         User user = User.fromJson(data['user']);
-        debugPrint("====user ${user}");
+        await storageService.setBoolean('use_biometric', true);
         await storageService.saveUser(user);
         Get.offNamed(RouteClass.getHomeRoute());
       } else {
@@ -99,6 +95,28 @@ class LoginController extends GetxController {
       debugPrint('Logout error: ${e.toString()}');
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  Future<void> _tryAutoBiometricAuth() async {
+    final bool useBiometrics =
+        storageService.getBoolean('use_biometric') ? true : false;
+    if (useBiometrics) {
+      final biometricAuth = BiometricAuthService();
+      final success = await biometricAuth.authenticate();
+      if (success) {
+        final User? user = storageService.getUser();
+        if (user != null) {
+          Get.offAllNamed(RouteClass.getHomeRoute());
+        } else {
+          Fluttertoast.showToast(
+            msg: 'Biometric authentication failed',
+            backgroundColor: Colors.white,
+            textColor: Colors.red,
+            gravity: ToastGravity.TOP,
+          );
+        }
+      }
     }
   }
 }

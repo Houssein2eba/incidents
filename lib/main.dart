@@ -61,7 +61,8 @@ class MyApp extends StatelessWidget {
       ),
       
       
-      initialRoute: RouteClass.getHomeRoute(),
+      initialRoute: RouteClass.getLoginRoute(),
+      defaultTransition: Transition.leftToRight,
       getPages: 
         RouteClass.getPages(),
     );
