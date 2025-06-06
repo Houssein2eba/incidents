@@ -5,7 +5,7 @@ import 'package:incidents/widgets/special_button.dart';
 
 class RegisterForm extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final RegisterController controller = Get.find();
+  final RegisterController controller = Get.put(RegisterController());
 
   RegisterForm({super.key});
 
@@ -89,7 +89,7 @@ class RegisterForm extends StatelessWidget {
                                   controller.isPasswordVisible.value
                                       ? Icons.visibility_off_outlined
                                       : Icons.visibility_outlined,
-                                  color: colorScheme.onSurface.withOpacity(0.6),
+                                  color: colorScheme.onSurface.withValues(alpha: 0.6),
                                 ),
                                 onPressed: () {
                                   controller.isPasswordVisible.value =
@@ -115,7 +115,7 @@ class RegisterForm extends StatelessWidget {
                                   controller.isConfirmPasswordVisible.value
                                       ? Icons.visibility_off_outlined
                                       : Icons.visibility_outlined,
-                                  color: colorScheme.onSurface.withOpacity(0.6),
+                                  color: colorScheme.onSurface.withValues(alpha: 0.6),
                                 ),
                                 onPressed: () {
                                   controller.isConfirmPasswordVisible.value =
@@ -183,11 +183,11 @@ class RegisterForm extends StatelessWidget {
       obscureText: obscureText,
       decoration: InputDecoration(
         labelText: label,
-        prefixIcon: Icon(icon, color: colorScheme.onSurface.withOpacity(0.6)),
+        prefixIcon: Icon(icon, color: colorScheme.onSurface.withValues(alpha: 0.6)),
         suffixIcon: suffixIcon,
         filled: true,
         fillColor: colorScheme.surface,
-        labelStyle: TextStyle(color: colorScheme.onSurface.withOpacity(0.6)),
+        labelStyle: TextStyle(color: colorScheme.onSurface.withValues(alpha: 0.6)),
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),

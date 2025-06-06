@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:incidents/core/localization/translations.dart';
 import 'package:incidents/routes/route.dart';
 import 'package:get/get.dart';
 import 'package:incidents/service/permissions_service.dart';
@@ -61,8 +62,10 @@ class MyApp extends StatelessWidget {
       ),
       
       
-      initialRoute: RouteClass.getLoginRoute(),
+    
       defaultTransition: Transition.leftToRight,
+      translations: AllTranslations(),
+      locale: Get.deviceLocale,
       getPages: 
         RouteClass.getPages(),
     );

@@ -4,7 +4,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:incidents/model/user_model.dart';
 import 'package:incidents/routes/route.dart';
 import 'package:incidents/service/biometric_auth.dart';
 import 'package:incidents/service/shared_pref.dart';
@@ -48,11 +47,9 @@ class LoginController extends GetxController {
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
 
-        await storageService.saveToken(data['token']);
-        User user = User.fromJson(data['user']);
-        await storageService.setBoolean('use_biometric', true);
-        await storageService.saveUser(user);
-        Get.offNamed(RouteClass.getHomeRoute());
+         storageService.sharedPreferences.setString('token',(data['token']));
+        
+        Get.offNamed(RouteClass.home);
       } else {
         final errorData = json.decode(response.body);
         debugPrint('Login error: ${errorData['message']}');
@@ -79,7 +76,7 @@ class LoginController extends GetxController {
   Future<void> logout() async {
     try {
       isLoading.value = true;
-      await storageService.clearToken();
+      await storageService.sharedPreferences.remove('token');
       await http
           .post(
             Uri.parse('http://192.168.100.13:8000/api/auth/logout'),
@@ -90,7 +87,7 @@ class LoginController extends GetxController {
           )
           .timeout(const Duration(seconds: 30));
 
-      Get.offAllNamed(RouteClass.getLoginRoute());
+      Get.offAllNamed(RouteClass.login);
     } catch (e) {
       debugPrint('Logout error: ${e.toString()}');
     } finally {
@@ -100,14 +97,14 @@ class LoginController extends GetxController {
 
   Future<void> _tryAutoBiometricAuth() async {
     final bool useBiometrics =
-        storageService.getBoolean('use_biometric') ? true : false;
+        storageService.sharedPreferences.getBool('useBiometrics') ?? false;
     if (useBiometrics) {
       final biometricAuth = BiometricAuthService();
       final success = await biometricAuth.authenticate();
       if (success) {
-        final User? user = storageService.getUser();
-        if (user != null) {
-          Get.offAllNamed(RouteClass.getHomeRoute());
+        final String? token = storageService.sharedPreferences.getString('token');
+        if (token != null) {
+          Get.offAllNamed(RouteClass.home);
         } else {
           Fluttertoast.showToast(
             msg: 'Biometric authentication failed',

@@ -6,7 +6,7 @@ import 'package:incidents/widgets/special_button.dart';
 
 class LoginForm extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final LoginController authController = Get.find();
+  final LoginController authController = Get.put(LoginController());
 
   LoginForm({super.key});
 
@@ -104,7 +104,7 @@ class LoginForm extends StatelessWidget {
                                   authController.isPasswordHidden.value
                                       ? Icons.visibility_off
                                       : Icons.visibility,
-                                  color: colorScheme.onSurface.withOpacity(0.6),
+                                  color: colorScheme.onSurface.withValues(alpha: 0.6),
                                 ),
                                 onPressed: () {
                                   authController.isPasswordHidden.value =
@@ -126,7 +126,7 @@ class LoginForm extends StatelessWidget {
                             alignment: Alignment.centerRight,
                             child: TextButton(
                               onPressed: () {
-                                // TODO: Implement forgot password
+                                
                               },
                               child: Text(
                                 'Forgot Password?',
@@ -152,7 +152,7 @@ class LoginForm extends StatelessWidget {
                       ),
                     ),
 
-                    Divider(color: colorScheme.outline.withOpacity(0.3)),
+                    Divider(color: colorScheme.outline.withValues(alpha: 0.6)),
                     const SizedBox(height: 16),
 
                     // Register Navigation
@@ -165,7 +165,7 @@ class LoginForm extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed:
-                              () => Get.toNamed(RouteClass.getRegisterRoute()),
+                              () => Get.toNamed(RouteClass.register),
                           child: Text(
                             'Register',
                             style: TextStyle(color: colorScheme.primary),
@@ -201,8 +201,8 @@ class LoginForm extends StatelessWidget {
       obscureText: obscureText,
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: TextStyle(color: colorScheme.onSurface.withOpacity(0.6)),
-        prefixIcon: Icon(icon, color: colorScheme.onSurface.withOpacity(0.6)),
+        labelStyle: TextStyle(color: colorScheme.onSurface.withValues(alpha: 0.6)),
+        prefixIcon: Icon(icon, color: colorScheme.onSurface.withValues(alpha: 0.6)),
         suffixIcon: suffixIcon,
         filled: true,
         fillColor: colorScheme.surface,

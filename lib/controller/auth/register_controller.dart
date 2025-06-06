@@ -4,8 +4,7 @@ import 'package:flutter/material.dart'
     show Colors, Icon, Icons, TextEditingController, debugPrint;
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:incidents/model/user_model.dart';
-import 'package:incidents/routes/route.dart';
+
 import 'package:incidents/service/shared_pref.dart';
 
 class RegisterController extends GetxController {
@@ -48,8 +47,8 @@ class RegisterController extends GetxController {
 
       );
 
-      print('Register response===============: ${response.body}');
-      print('Register status code===============: ${response.statusCode}');
+      debugPrint('Register response===============: ${response.body}');
+      debugPrint('Register status code===============: ${response.statusCode}');
       if (response.statusCode == 201) {
 
         Get.snackbar('success', 'registrer avec success', backgroundColor: Colors.white,icon: Icon(Icons.check),shouldIconPulse: true);
