@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:incidents/controller/home_controller.dart';
+import 'package:incidents/core/constant/color.dart';
+import 'package:incidents/widgets/home/custom_date.dart';
+import 'package:incidents/widgets/home/custom_drop.dart';
 import 'package:incidents/widgets/home/image_selector.dart';
 import 'package:incidents/widgets/special_button.dart';
 
@@ -59,62 +62,26 @@ class HomePage extends StatelessWidget {
                       'Date',
                       style: textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: colorScheme.onSurface.withValues(alpha: 0.6),
+                        color: AppColor.textPrimary,
                     ),),
                     const SizedBox(height: 8),
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 14),
-                      decoration: BoxDecoration(
-                        color: colorScheme.surface,
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
-                          color: colorScheme.outline.withValues(alpha: 0.6),
-                        ),
-                      ),
-                      child: Text(
-                        'TUE MAY 27 2025',
-                        style: textTheme.bodyLarge?.copyWith(
-                          color: colorScheme.onSurface,
-                        ),
-                      ),
-                    ),
+                    CustomDate(),
                     const SizedBox(height: 20),
 
                     // Incident Type Dropdown
-                    DropdownButtonFormField<String>(
-                      decoration: InputDecoration(
-                        labelText: 'Incident Type',
-                        labelStyle: TextStyle(
-                            color: colorScheme.onSurface.withValues(alpha: 0.6)),
-                        filled: true,
-                        fillColor: colorScheme.surface,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(
-                              color: colorScheme.primary, width: 2),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 12),
-                      ),
+                    CustomDropDown(
+                      onChanged: (value)  {
+                        // controller.selectedIncidentType.value = value;
+                      },
+                      label: "Incident Type",
                       items: [
-                        DropdownMenuItem(
-                          value: 'Option 1',
-                          child: Text('Option 1',
-                              style: textTheme.bodyMedium),
-                        ),
-                        DropdownMenuItem(
-                          value: 'Option 2',
-                          child: Text('Option 2',
-                              style: textTheme.bodyMedium),
-                        ),
+                        "Fire",
+                        "Theft",
+                        "Accident",
+                        "Medical",
+                        "Other",
                       ],
-                      onChanged: (value) {},
+                      
                     ),
                     const SizedBox(height: 24),
 
@@ -123,7 +90,7 @@ class HomePage extends StatelessWidget {
                       'Add Image',
                       style: textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: colorScheme.onSurface.withValues(alpha: 0.6),
+                        color: AppColor.textPrimary,
                     ),),
                     const SizedBox(height: 8),
                     ImageSelector(),
