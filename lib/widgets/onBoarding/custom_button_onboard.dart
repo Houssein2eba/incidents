@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:incidents/controller/onboarder_controller.dart';
 import 'package:incidents/core/constant/color.dart';
+import 'package:incidents/data/datasource/static.dart';
 
 class CustomButtonOnBoarding extends GetView<OnboarderControllerImp> {
   const CustomButtonOnBoarding({super.key});
@@ -18,7 +18,11 @@ class CustomButtonOnBoarding extends GetView<OnboarderControllerImp> {
             controller.next();
           },
           color: AppColor.primary,
-          child: Text("Text button")),
+          child: GetBuilder< OnboarderControllerImp>(
+            builder: (context) {
+              return context.currentPage == onBoardingData.length - 1 ? Text("start".tr) : Text("next".tr);
+            }
+          )),
     );
   }
 }

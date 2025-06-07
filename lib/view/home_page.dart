@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:incidents/controller/home_controller.dart';
-import 'package:incidents/core/constant/color.dart';
 import 'package:incidents/widgets/home/custom_date.dart';
 import 'package:incidents/widgets/home/custom_drop.dart';
 import 'package:incidents/widgets/home/custom_label.dart';
