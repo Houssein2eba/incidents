@@ -85,8 +85,36 @@ class HomePage extends StatelessWidget {
                     CustomLabel(text:"Selectioner image"),
                     const SizedBox(height: 8),
                     ImageSelector(),
-                    const SizedBox(height: 10),
-                    CustomLabel(text:"Description textielle"),
+                    const SizedBox(height: 10),                    CustomLabel(text:"Description textielle"),
+                    const SizedBox(height: 8),
+                    TextField(
+                      maxLines: 4,
+                      decoration: InputDecoration(
+                        hintText: 'Enter incident description',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(
+                            color: colorScheme.outline.withOpacity(0.6),
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(
+                            color: colorScheme.outline.withOpacity(0.6),
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(
+                            color: colorScheme.primary,
+                          ),
+                        ),
+                        contentPadding: const EdgeInsets.all(16),
+                      ),
+                      onChanged: (value) {
+                        controller.descriptionText.value = value;
+                      },
+                    ),
                     const SizedBox(height: 24),
                     // Submit Button
                     SpecialButton(

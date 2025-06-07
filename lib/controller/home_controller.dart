@@ -8,6 +8,7 @@ import 'package:incidents/service/permissions_service.dart';
 class HomeController extends GetxController {
   var selectedImagePaths = <String>[].obs;
   var selectedImageSizes = <String>[].obs;
+  var descriptionText = ''.obs;
 
   late final PermissionsService permissionsService;
   static const int maxImages = 3;

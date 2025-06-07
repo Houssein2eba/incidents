@@ -20,7 +20,7 @@ class CustomDropDown extends StatelessWidget {
     return DropdownButtonFormField<String>(
       value: value,
       decoration: InputDecoration(
-        labelText: label,
+        labelText: '',
         labelStyle: TextStyle(
           color: AppColor.textPrimary,
         ),
