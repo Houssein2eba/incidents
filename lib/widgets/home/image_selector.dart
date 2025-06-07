@@ -44,7 +44,7 @@ class ImageSelector extends GetView<HomeController> {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    'Tap to add photo (0/${HomeController.maxImages})',
+                    '${'tap_to_add_photo'.tr} (0/${HomeController.maxImages})',
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
                     ),
@@ -89,7 +89,7 @@ class ImageSelector extends GetView<HomeController> {
                           ),
                           const SizedBox(height: 12),
                           Text(
-                            'Add more\n(${controller.selectedImagePaths.length}/${HomeController.maxImages})',
+                            '${'add_more_photos'.tr}\n(${controller.selectedImagePaths.length}/${HomeController.maxImages})',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),

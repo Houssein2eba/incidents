@@ -23,7 +23,7 @@ class ShowImagePicker extends GetView<HomeController> {
                 ListTile(
                   leading: Icon(Icons.camera_alt,
                       color: Theme.of(context).colorScheme.primary),
-                  title: Text('Take Photo',
+                  title: Text('take_photo'.tr,
                       style: Theme.of(context).textTheme.bodyLarge),
                   onTap: () {
                     controller.getImage(ImageSource.camera);
@@ -34,7 +34,7 @@ class ShowImagePicker extends GetView<HomeController> {
                 ListTile(
                   leading: Icon(Icons.photo_library,
                       color: Theme.of(context).colorScheme.primary),
-                  title: Text('Choose from Gallery',
+                  title: Text('choose_gallery'.tr,
                       style: Theme.of(context).textTheme.bodyLarge),
                   onTap: () {
                     controller.getImage(ImageSource.gallery);

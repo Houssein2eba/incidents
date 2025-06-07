@@ -20,9 +20,8 @@ class HomePage extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final textTheme = theme.textTheme;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Incident Reporter"),
+    return Scaffold(      appBar: AppBar(
+        title: Text("incident_reporter".tr),
         centerTitle: true,
         actions: [
           IconButton(
@@ -47,9 +46,8 @@ class HomePage extends StatelessWidget {
                 padding: const EdgeInsets.all(24.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Report Incident',
+                  children: [                    Text(
+                      'report_incident'.tr,
                       style: textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: colorScheme.primary,
@@ -57,39 +55,38 @@ class HomePage extends StatelessWidget {
                     ),
                     const SizedBox(height: 24),
                     // Date Field
-                    CustomLabel(text:"Date"),
+                    CustomLabel(text: "date".tr),
                     const SizedBox(height: 8),
                     CustomDate(),
                     const SizedBox(height: 20),
                     const SizedBox(height: 6),
-                    CustomLabel(text:"Categorie"),
+                    CustomLabel(text: "category".tr),
                     const SizedBox(height: 8),
                     // Incident Type Dropdown
                     CustomDropDown(
                       onChanged: (value)  {
                         // controller.selectedIncidentType.value = value;
                       },
-                      label: "Incident Type",
-                      items: [
-                        "Fire",
-                        "Theft",
-                        "Accident",
-                        "Medical",
-                        "Other",
+                      label: "Incident Type",                      items: [
+                        "fire".tr,
+                        "theft".tr,
+                        "accident".tr,
+                        "medical".tr,
+                        "other".tr,
                       ],
                       
                     ),
                     const SizedBox(height: 24),
                     // Image Selector
-                    CustomLabel(text:"Selectioner image"),
+                    CustomLabel(text: "select_image".tr),
                     const SizedBox(height: 8),
                     ImageSelector(),
-                    const SizedBox(height: 10),                    CustomLabel(text:"Description textielle"),
+                    const SizedBox(height: 10),                    CustomLabel(text: "description".tr),
                     const SizedBox(height: 8),
                     TextField(
                       maxLines: 4,
                       decoration: InputDecoration(
-                        hintText: 'Enter incident description',
+                        hintText: 'enter_description'.tr,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                           borderSide: BorderSide(
@@ -117,7 +114,7 @@ class HomePage extends StatelessWidget {
                     const SizedBox(height: 24),
                     // Submit Button
                     SpecialButton(
-                      text: 'Submit Report',
+                      text: 'submit_report'.tr,
                       onPress: () {},
                       color: colorScheme.primary,
                       textColor: colorScheme.onPrimary,
