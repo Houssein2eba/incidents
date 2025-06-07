@@ -6,6 +6,7 @@ import 'package:incidents/controller/home_controller.dart';
 import 'package:incidents/core/constant/color.dart';
 import 'package:incidents/widgets/home/custom_date.dart';
 import 'package:incidents/widgets/home/custom_drop.dart';
+import 'package:incidents/widgets/home/custom_label.dart';
 import 'package:incidents/widgets/home/image_selector.dart';
 import 'package:incidents/widgets/special_button.dart';
 
@@ -56,18 +57,14 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 24),
-
                     // Date Field
-                    Text(
-                      'Date',
-                      style: textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: AppColor.textPrimary,
-                    ),),
+                    CustomLabel(text:"Date"),
                     const SizedBox(height: 8),
                     CustomDate(),
                     const SizedBox(height: 20),
-
+                    const SizedBox(height: 6),
+                    CustomLabel(text:"Categorie"),
+                    const SizedBox(height: 8),
                     // Incident Type Dropdown
                     CustomDropDown(
                       onChanged: (value)  {
@@ -84,18 +81,13 @@ class HomePage extends StatelessWidget {
                       
                     ),
                     const SizedBox(height: 24),
-
                     // Image Selector
-                    Text(
-                      'Add Image',
-                      style: textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: AppColor.textPrimary,
-                    ),),
+                    CustomLabel(text:"Selectioner image"),
                     const SizedBox(height: 8),
                     ImageSelector(),
+                    const SizedBox(height: 10),
+                    CustomLabel(text:"Description textielle"),
                     const SizedBox(height: 24),
-
                     // Submit Button
                     SpecialButton(
                       text: 'Submit Report',

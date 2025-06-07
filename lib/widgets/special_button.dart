@@ -11,17 +11,20 @@ class SpecialButton extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-                        backgroundColor: color,
-                        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+                          backgroundColor: color,
+                          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          elevation: 2,
                         ),
-                        elevation: 2,
-                      ),
-      onPressed: onPress,
-      child: Text(text, style: TextStyle(color: textColor),),
+        onPressed: onPress,
+        child: Text(text, style: TextStyle(color: textColor),),
+      ),
     );
   }
 
